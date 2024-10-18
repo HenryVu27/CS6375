@@ -13,6 +13,8 @@ import string
 from argparse import ArgumentParser
 import pickle
 import matplotlib.pyplot as plt
+from sklearn.metrics import classification_report
+
 unk = '<UNK>'
 # Consult the PyTorch documentation for information on the functions used below:
 # https://pytorch.org/docs/stable/torch.html
@@ -81,18 +83,13 @@ if __name__ == "__main__":
     # optimizer = optim.SGD(model.parameters(), lr=0.01, momentum=0.9)
     optimizer = optim.Adam(model.parameters(), lr=0.01)
     word_embedding = pickle.load(open('./word_embedding.pkl', 'rb'))
-    
-
-    stopping_condition = False
-    epoch = 0
-
     last_train_accuracy = 0
     last_validation_accuracy = 0
     train_acc = []
     val_acc = []
     train_loss = []
     val_loss = []
-    for i in range(args.epochs):
+    for epoch in range(args.epochs):
         random.shuffle(train_data)
         model.train()
         # You will need further code to operationalize training, ffnn.py may be helpful
@@ -141,7 +138,6 @@ if __name__ == "__main__":
         print(loss_total/loss_count)
         print("Training completed for epoch {}".format(epoch + 1))
         print("Training accuracy for epoch {}: {}".format(epoch + 1, correct / total))
-        
 
         model.eval()
         correct = 0
@@ -149,7 +145,8 @@ if __name__ == "__main__":
         random.shuffle(valid_data)
         print("Validation started for epoch {}".format(epoch + 1))
         valid_data = valid_data
-
+        true_val_labels = []
+        predicted_val_labels = []
         for input_words, gold_label in tqdm(valid_data):
             input_words = " ".join(input_words)
             input_words = input_words.translate(input_words.maketrans("", "", string.punctuation)).split()
@@ -158,9 +155,10 @@ if __name__ == "__main__":
             vectors = torch.tensor(vectors).view(len(vectors), 1, -1)
             output = model(vectors)
             predicted_label = torch.argmax(output)
+            true_val_labels.append(gold_label)
+            predicted_val_labels.append(predicted_label)
             correct += int(predicted_label == gold_label)
             total += 1
-            # print(predicted_label, gold_label)
         print("Validation completed for epoch {}".format(epoch + 1))
         print("Validation accuracy for epoch {}: {}".format(epoch + 1, correct / total))
         validation_accuracy = correct/total
@@ -173,6 +171,8 @@ if __name__ == "__main__":
             last_validation_accuracy = validation_accuracy
             last_train_accuracy = trainning_accuracy
         epoch += 1
+    print("========== Classification Report for Validation Dataset ==========")
+    print(classification_report(true_val_labels, predicted_val_labels, labels=[0, 1, 2, 3, 4]))
     plt.figure()
     epochs = range(1, args.epochs + 1)
     plt.plot(epochs, train_acc, 'b', label='Training accuracy')

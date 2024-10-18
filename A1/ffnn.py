@@ -115,20 +115,20 @@ def compute_summary_statistics(data, dat_name):
     print("Label distribution: {}".format(labels))
     print("Vocabulary size: {}".format(vocab_size))
 
-    # plt.figure()
-    # labels, counts = zip(*sorted(labels.items()))
-    # plt.bar(labels, counts, tick_label=[label + 1 for label in labels])
-    # plt.title("{} Label Distribution".format(dat_name))
-    # plt.xlabel("Rating")
-    # plt.ylabel("Number of Samples")
-    # plt.show()
+    plt.figure()
+    labels, counts = zip(*sorted(labels.items()))
+    plt.bar(labels, counts, tick_label=[label + 1 for label in labels])
+    plt.title("{} Label Distribution".format(dat_name))
+    plt.xlabel("Rating")
+    plt.ylabel("Number of Samples")
+    plt.show()
 
-    # plt.figure()
-    # plt.hist(doc_lengths, bins=50)
-    # plt.title("{} Input Length Distribution".format(dat_name))
-    # plt.xlabel("Input Length (words)")
-    # plt.ylabel("Number of Documents")
-    # plt.show()
+    plt.figure()
+    plt.hist(doc_lengths, bins=50)
+    plt.title("{} Input Length Distribution".format(dat_name))
+    plt.xlabel("Input Length (words)")
+    plt.ylabel("Number of Documents")
+    plt.show()
 
 if __name__ == "__main__":
     parser = ArgumentParser()
@@ -233,7 +233,7 @@ if __name__ == "__main__":
         print("Validation completed for epoch {}".format(epoch + 1))
         print("Validation accuracy for epoch {}: {}".format(epoch + 1, correct / total))
         print("Validation time for this epoch: {}".format(time.time() - start_time))
-    print("========== Classification Report for Validation Dataset ==========".format(epoch + 1))
+    print("========== Classification Report for Validation Dataset ==========")
     print(classification_report(true_val_labels, predicted_val_labels, labels=[0, 1, 2, 3, 4]))
 
     # Plots for training and validation
