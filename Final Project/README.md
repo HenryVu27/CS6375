@@ -28,3 +28,6 @@ The ZuCo 2.0 dataset is available at: https://osf.io/2urht/
 ## Notes
 - For detailed information on parameter settings and model configurations, refer to the documentation in `config.py`.
 
+## Disclaimer:
+- Data collection and preprocessing, as well as most of the starter code (model training + inference, etc.) were done by Nora Hollenstein's team.
+- My contribution was the 'Conformer' architecture which combines convolution and self-attention to extract EEG, and implementing the RoBERTa model.
