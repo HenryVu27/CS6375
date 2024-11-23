@@ -12,11 +12,6 @@ import random
 from datetime import timedelta
 import time
 
-# Usage on spaceml:
-# $ conda activate env-eego
-# $ CUDA_VISIBLE_DEVICES=7 python tune_text_model.py
-
-
 def main():
     start = time.time()
     feature_dict = {}

@@ -7,8 +7,8 @@ class MultiInputModel(nn.Module):
     def __init__(self, text_embedding_size, eeg_feature_size, hidden_size, num_classes):
         super(MultiInputModel, self).__init__()
 
-        self.Conformer=Conformer()
-        self.fc1 = nn.Linear(text_embedding_size *2, hidden_size)
+        self.Conformer = Conformer()
+        self.fc1 = nn.Linear(text_embedding_size*2, hidden_size)
         self.fc2 = nn.Linear(hidden_size, num_classes)
         self.softmax = nn.Softmax(dim=1)
         self.eeg_model=Conformer()

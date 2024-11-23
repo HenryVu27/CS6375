@@ -114,22 +114,6 @@ def dict2features():
     eeg_X = ml_helpers.scale_feature_values(eeg_X)
     X_data_eeg = ml_helpers.pad_cognitive_feature_seqs(eeg_X, max_length_cogni, "eeg")
 
-    # theta_X, max_length_cogni = ml_helpers.prepare_cogni_seqs(eeg_dict_theta)
-    # theta_X = ml_helpers.scale_feature_values(theta_X)
-    # X_data_theta = ml_helpers.pad_cognitive_feature_seqs(theta_X, max_length_cogni, "eeg")
-
-    # alpha_X, max_length_cogni = ml_helpers.prepare_cogni_seqs(eeg_dict_alpha)
-    # alpha_X = ml_helpers.scale_feature_values(alpha_X)
-    # X_data_alpha = ml_helpers.pad_cognitive_feature_seqs(alpha_X, max_length_cogni, "eeg")
-
-    # beta_X, max_length_cogni = ml_helpers.prepare_cogni_seqs(eeg_dict_beta)
-    # beta_X = ml_helpers.scale_feature_values(beta_X)
-    # X_data_beta = ml_helpers.pad_cognitive_feature_seqs(beta_X, max_length_cogni, "eeg")
-
-    # gamma_X, max_length_cogni = ml_helpers.prepare_cogni_seqs(eeg_dict_gamma)
-    # gamma_X = ml_helpers.scale_feature_values(gamma_X)
-    # X_data_gamma = ml_helpers.pad_cognitive_feature_seqs(gamma_X, max_length_cogni, "eeg")
-
     return X_data_text, X_text_masks, X_data_eeg, y
 
 

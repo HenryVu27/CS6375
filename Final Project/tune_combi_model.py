@@ -14,11 +14,6 @@ import random
 from datetime import timedelta
 import time
 
-# Usage on spaceml:
-# $ conda activate env-eego
-# $ CUDA_VISIBLE_DEVICES=7 python tune_model.py
-
-
 def main():
     start = time.time()
     feature_dict = {}
@@ -269,7 +264,6 @@ def main():
                                                     print('iteration {} done'.format(count))
                                                     print('Time since starting the loop: {}'.format(timedelta(seconds=int(elapsed))))
                                                     count += 1
-
 
 if __name__ == '__main__':
     main()

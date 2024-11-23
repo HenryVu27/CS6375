@@ -35,14 +35,12 @@ def plot_prediction_distribution(true, pred):
     
 def plot_label_distribution(y):
     """Analyze label distribution of dataset"""
-
     if config.class_task == "reldetect":
 
         label_names = ["Visited", "Founder", "Nationality", "Wife", "Political Affiliation", "Job Title", "Education",
                        "Employer", "Awarded", "Birth Place", "Death Place"]
 
         all_relations = np.sum(y, 0)
-
         plt.clf()
         fig, ax = plt.subplots()
         all_relations, label_names = zip(*sorted(zip(all_relations, label_names)))
@@ -185,7 +183,7 @@ def prepare_sequences_for_bert_with_mask(X, max_length):
 
 
 def create_new_bert_layer():
-    bert= TFRobertaModel.from_pretrained("roberta-base")
+    bert = TFRobertaModel.from_pretrained("roberta-base")
     # bert = TFBertModel.from_pretrained("bert-base-uncased")
     # bert = TFBertModel.from_pretrained("/mnt/ds3lab-scratch/noraho/berts/")
 

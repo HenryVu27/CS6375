@@ -67,17 +67,6 @@ def save_results(fold_results_dict, task):
     elif config.class_task == "reldetect":
         result_file = open('reldetect/results/' + str(date.today()) + "_results_" + task + "_" + "-".join(config.feature_set) + "-" + config.embeddings + ".txt", 'a')
 
-    # print header
-    #if config.model is 'cnn':
-     #   print("lstm_dim", "lstm_layers", "dense_dim", "dropout", "batch_size", "epochs", "lr", "embedding_type", "random_seed", "train_acc", "val_acc",
-      #      "test_acc", "test_std", "avg_precision", "std_precision", "avg_recall", "std_recall", "avg_fscore", "std_fscore", "threshold", "folds",
-       #     "training_time", 'best_ep', 'patience', 'min_delta', "model", "model_type", "inception_filters", "inception_kernel_sizes",
-        #    "inception_pool_size", "inception_dense_dim", "data_percentage", file=result_file)
-    #else:
-     #   print("lstm_dim", "lstm_layers", "dense_dim", "dropout", "batch_size", "epochs", "lr", "embedding_type", "random_seed", "train_acc", "val_acc",
-      #      "test_acc", "test_std", "avg_precision", "std_precision", "avg_recall", "std_recall", "avg_fscore", "std_fscore", "threshold", "folds",
-       #     "training_time", 'best_ep', 'patience', 'min_delta', "model", "model_type", file=result_file)
-
     # training scores
     train_acc = np.mean([ep[-1] for ep in fold_results_dict['train-accuracy']])
 
@@ -118,6 +107,3 @@ def save_results(fold_results_dict, task):
         print(" ".join(map(str, fold_results_dict['params'])),train_acc, val_acc, avg_accuracy, std_accuracy, avg_precision,
             std_precision, avg_recall, std_recall, avg_fscore, std_fscore, threshold, folds, fold_results_dict['training_time'], 
             best_eps, fold_results_dict['patience'], fold_results_dict['min_delta'], fold_results_dict['model'][-1], model_type, data_percentage, file=result_file)
-
-
-

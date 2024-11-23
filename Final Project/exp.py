@@ -1,5 +1,9 @@
 import time
 import torch
+import numpy as np
+import scipy
+from torch.autograd import Variable
+from conformer import Conformer
 
 class ExP():
     def __init__(self, nsub):
@@ -27,7 +31,8 @@ class ExP():
         self.criterion_cls = torch.nn.CrossEntropyLoss().cuda()
 
         self.model = Conformer().cuda()
-        self.model = nn.DataParallel(self.model, device_ids=[i for i in range(len(gpus))])
+        # If there are multiple GPUs, use this:
+        # self.model = torch.nn.DataParallel(self.model, device_ids=[i for i in range(len(gpus))])
         self.model = self.model.cuda()
         # summary(self.model, (1, 22, 1000))
 
@@ -60,7 +65,6 @@ class ExP():
 
         self.testData = self.test_data
         self.testLabel = self.test_label[0]
-
 
         # standardize
         target_mean = np.mean(self.allData)
